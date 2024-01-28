@@ -3,3 +3,7 @@
 .mypy_cache
 __pycache__
 cookie.pkl
+.venv
+
+# entrypoint for automation
+run.sh
