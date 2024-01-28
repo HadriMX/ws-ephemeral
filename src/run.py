@@ -10,7 +10,7 @@ import config
 from lib.qbit import QbitManager
 from logger import setup_logging
 from monitor import HEARTBEAT, monitor
-from util import catch_exceptions
+from util import catch_exceptions, write_output_file
 from ws import Windscribe
 
 setup_logging()
@@ -57,11 +57,13 @@ def main() -> None:
     except Exception:
         logger.error("not able to work with qbit")
         raise
-    qbit.set_listen_port(port)
+
+    if qbit.set_listen_port(port):
+        write_output_file(port)
 
     if config.QBIT_PRIVATE_TRACKER:
         qbit.setup_private_tracker()
-    logger.info("Port setup completed..")
+    logger.info("Port setup completed.")
 
 
 if __name__ == "__main__":
