@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# global variables
+DOCKER_COMPOSE_FILE="/path/to/compose.yml"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# python script variables
+export WS_USERNAME="..."
+export WS_PASSWORD="..."
+export QBIT_USERNAME="..."
+export QBIT_PASSWORD="..."
+export QBIT_HOST="http://0.0.0.0"
+export QBIT_PORT="8080"
+export QBIT_PRIVATE_TRACKER="false"
+export OUTPUT_FILE_PATH="/path/to/output/.env"
+export OUTPUT_FILE_KEY="WINDSCRIBE_EPHEMERAL_PORT"
+export REQUEST_TIMEOUT="10"
+
+set -e
+source "${SCRIPT_DIR}/.venv/bin/activate"
+python "${SCRIPT_DIR}/src/run.py"
+
+docker compose -f $DOCKER_COMPOSE_FILE restart gluetun
