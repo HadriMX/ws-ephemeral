@@ -15,7 +15,8 @@ _REQUEST_TIMEOUT: int = int(os.getenv("REQUEST_TIMEOUT", "5"))
 # timeouts are disabled if None is used
 REQUEST_TIMEOUT: int | None = None if _REQUEST_TIMEOUT == -1 else _REQUEST_TIMEOUT
 
-BASE_PATH: Path = Path(".")
+current_directory = os.path.dirname(os.path.abspath(__file__))
+BASE_PATH: Path = Path(current_directory)
 
 # common config
 CSRF_URL: str = "https://res.windscribe.com/res/logintoken"
