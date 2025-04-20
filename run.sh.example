@@ -20,4 +20,6 @@ set -e
 source "${SCRIPT_DIR}/.venv/bin/activate"
 python "${SCRIPT_DIR}/src/run.py"
 
-docker compose -f $DOCKER_COMPOSE_FILE restart gluetun
+docker compose -f $DOCKER_COMPOSE_FILE stop qbittorrent
+sleep 60
+docker compose -f $DOCKER_COMPOSE_FILE up -d
